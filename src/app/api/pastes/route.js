@@ -44,8 +44,13 @@ export async function POST(req) {
 );
 
 
-  return NextResponse.json({
-    id,
-    url: `${process.env.VERCEL_URL || "http://localhost:3000"}/p/${id}`,
-  });
+  const baseUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "http://localhost:3000";
+
+return NextResponse.json({
+  id,
+  url: `${baseUrl}/p/${id}`,
+});
+
 }
