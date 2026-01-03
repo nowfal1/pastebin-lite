@@ -1,36 +1,25 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pastebin Lite
 
-## Getting Started
+Pastebin Lite is a simple web application that allows users to create text pastes and share them using a unique URL. Each paste can optionally expire after a given time (TTL) or after a limited number of views.
 
-First, run the development server:
+## Running the Project Locally
 
-```bash
+1. Clone the repository:
+git clone <your-repository-url>
+cd pastebin-lite
+
+2. Install dependencies:
+npm install
+
+3. Create a `.env.local` file in the project root and add:
+KV_URL=redis://default:4gVkxDxTcYKAQKKIOjaOT2JFfkadtJ2P@redis-10681.c245.us-east-1-3.ec2.cloud.redislabs.com:10681
+
+4. Start the development server:
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open the application in your browser:
+http://localhost:3000
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Persistence Layer
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This application uses Redis as its persistence layer. Redis is provided via Vercel KV and is used to store paste content, expiration time, and remaining view count. The data is persistent across requests and is not stored in memory.
