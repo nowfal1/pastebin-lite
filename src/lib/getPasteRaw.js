@@ -9,22 +9,22 @@ export async function getPasteRaw(id) {
   const paste = JSON.parse(raw);
   const now = Date.now();
 
-  // Check expiry
+  // Check TTL expiry
   if (paste.expires_at && now > paste.expires_at) {
     await redis.del(key);
     return null;
   }
 
-  // Check views
+  // 🔑 View limit logic (FIXED)
   if (paste.remaining_views !== null) {
-    if (paste.remaining_views <= 0) {
+    // Block only if views already exhausted
+    if (paste.remaining_views < 1) {
       await redis.del(key);
       return null;
     }
 
-    // 🔽 DECREMENT VIEW COUNT
+    // Allow this view, then decrement
     paste.remaining_views -= 1;
-
     await redis.set(key, JSON.stringify(paste));
   }
 
