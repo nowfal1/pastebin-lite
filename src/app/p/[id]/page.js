@@ -16,9 +16,6 @@ export default async function PastePage({ params }) {
     return <h1>404 – Paste Expired</h1>;
   }
 
-  if (paste.remaining_views !== null && paste.remaining_views <= 0) {
-    return <h1>404 – No Views Left</h1>;
-  }
 
   return (
     <pre style={{ whiteSpace: "pre-wrap", padding: "20px" }}>
